@@ -1,0 +1,14 @@
+---
+extends: default
+
+rules:
+  # 80 is too tight for Ansible and Compose; 120 is a common compromise.
+  line-length:
+    max: 120
+  # GitHub Actions uses `on:` as a key, which the truthy rule otherwise
+  # flags as a YAML 1.1 boolean.
+  truthy:
+    check-keys: false
+
+ignore: |
+  .venv/
