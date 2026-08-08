@@ -1,0 +1,33 @@
+# Design docs and implementation plans written during planning sessions.
+# Deliberately excluded: they are working notes, not part of the portfolio.
+docs/specs/
+
+# Secrets. SOPS-encrypted files (*.sops.yml) ARE committed by design;
+# these patterns catch decrypted output and private keys, which never are.
+*.agekey
+keys.txt
+*.dec.yml
+*.dec.yaml
+secrets.plain.yml
+*.pem
+*.key
+
+# Ansible
+*.retry
+.ansible/
+inventory/host_vars/*.local.yml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
