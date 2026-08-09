@@ -10,5 +10,6 @@ common_packages:
   - rsync
   - unzip
   - vim
+  - python3-debian
 
 common_timezone: Etc/UTC
