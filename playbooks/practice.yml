@@ -3,3 +3,4 @@
   hosts: practice
   roles:
     - common
+    - docker
