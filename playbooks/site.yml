@@ -1,0 +1,5 @@
+---
+- name: Converge the homeserver
+  hosts: homeserver
+  roles:
+    - common

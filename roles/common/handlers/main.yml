@@ -1,0 +1,8 @@
+---
+# A handler runs only if notified, and only once per play no matter how many
+# tasks notify it. Changing the timezone leaves cron with a stale offset.
+- name: Restart cron
+  ansible.builtin.service:
+    name: cron
+    state: restarted
+  become: true

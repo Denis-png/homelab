@@ -1,0 +1,16 @@
+---
+# Every task needs a `name` — it is what appears in output and what you read
+# when something fails at 2am.
+- name: Ensure base packages are installed
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"       # list from defaults, never hardcoded
+    state: present                      # desired state, not an action
+    update_cache: true
+    cache_valid_time: 3600              # skip apt-update if done within an hour
+  become: true
+
+- name: Ensure the system timezone is set
+  community.general.timezone:
+    name: "{{ common_timezone }}"
+  become: true
+  notify: Restart cron                  # handlers run once, at the end

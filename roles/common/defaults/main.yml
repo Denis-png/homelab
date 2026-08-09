@@ -1,0 +1,14 @@
+---
+# Overridable defaults. Anything here can be replaced per-host or per-group
+# from inventory without editing the role.
+common_packages:
+  - ca-certificates
+  - curl
+  - git
+  - gnupg
+  - htop
+  - rsync
+  - unzip
+  - vim
+
+common_timezone: Etc/UTC
