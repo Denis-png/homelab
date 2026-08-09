@@ -9,6 +9,17 @@ rules:
   # flags as a YAML 1.1 boolean.
   truthy:
     check-keys: false
+  # The following rules are disabled because they are too strict for Ansible and Compose.
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: false
+  braces:
+    max-spaces-inside: 1
+  # YAML 1.1 allows octal values, but they are not supported in YAML 1.2,
+  # which is what Ansible and GitHub Actions use.
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
 
 ignore: |
   .venv/
