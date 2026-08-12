@@ -32,6 +32,12 @@ services:
         max-size: "1m"
         max-file: "1"
 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
     volumes:
       - ./searxng:/etc/searxng:rw
@@ -42,15 +48,18 @@ services:
 
   # ── Open WebUI — chat frontend for Ollama (and other LLM providers) ────
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: "{{ ai_openwebui_repo }}@{{ ai_openwebui_digest }}"
     container_name: open-webui
     restart: unless-stopped
+
     env_file:
       - /home/denispng/secrets/ai.env
+
     environment:
       OLLAMA_BASE_URL: "http://ollama:11434"
-      WEBUI_URL: "https://chat.denispng.com"
+      WEBUI_URL: "https://{{ ai_openwebui_subdomain }}.{{ homelab_domain }}"
       WEBUI_NAME: "Denispng AI"
+
       # Set to "false" via the Admin UI after creating the first account.
       # Disabling here before any user exists locks you out of admin signup.
       ENABLE_SIGNUP: "true"
@@ -63,7 +72,18 @@ services:
       # OPENAI_API_BASE_URLS / OPENAI_API_KEYS come from ai.env so the key isn't in git.
       ENABLE_OPENAI_API: "true"
 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
+    deploy:
+      resources:
+        limits:
+          cpus: "{{ ai_openwebui_cpu_limit }}"
+          memory: "{{ ai_openwebui_memory_limit }}"
 
     extra_hosts:
       - "host.docker.internal:host-gateway"
