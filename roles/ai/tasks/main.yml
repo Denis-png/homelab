@@ -1,0 +1,9 @@
+---
+- name: Render the ai stack compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: /srv/homelab/ai/docker-compose.yml
+    owner: denispng
+    group: denispng
+    mode: "0644"
+  become: true
