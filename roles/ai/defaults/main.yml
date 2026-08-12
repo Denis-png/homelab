@@ -1,0 +1,21 @@
+---
+# Searxng image repo
+ai_searxng_repo: "searxng/searxng"
+# Searxng image digest
+ai_searxng_digest: "sha256:88abccd25d3d54bf579d4ca76b95cc28cc5807151a6ce25bd40ccdfe4e27c06d"
+
+# Searxng subdomain
+ai_searxng_subdomain: "searxng"
+
+# OpenWebUI image repo
+ai_openwebui_repo: "ghcr.io/open-webui/open-webui"
+
+# OpenWebUI image digest
+ai_openwebui_digest: "sha256:c2e4723fdbca5de8f9f0529e22b78acf5bc312a88da730bed88860063d028fe8"
+
+# OpenWebUI subdomain
+ai_openwebui_subdomain: "chat"
+
+# OpenWebUI resource limits
+ai_openwebui_cpu_limit: "1.0"
+ai_openwebui_memory_limit: "1g"

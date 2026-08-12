@@ -9,7 +9,6 @@ networks:
 
 volumes:
   openclaw-plugin-runtime-deps:
-
 services:
   # ── Ollama — local LLM inference ──────────────────────────────
   ollama:
@@ -33,30 +32,33 @@ services:
     networks:
       - proxy-local
       - ai
-
-
   # ── SearXNG — privacy-respecting metasearch (used by Hermes Agent) ────
   searxng:
-    image: searxng/searxng:latest
+    image: "{{ ai_searxng_repo }}@{{ ai_searxng_digest }}"
     container_name: searxng
     restart: unless-stopped
-    volumes:
-      - ./searxng:/etc/searxng:rw
+
     environment:
-      SEARXNG_BASE_URL: "https://searxng.denispng.com/"
+      SEARXNG_BASE_URL: "https://{{ ai_searxng_subdomain }}.{{ homelab_domain }}"
       UWSGI_WORKERS: "2"
       UWSGI_THREADS: "4"
+
     cap_drop:
       - ALL
     cap_add:
       - CHOWN
       - SETGID
       - SETUID
+
     logging:
       driver: json-file
       options:
         max-size: "1m"
         max-file: "1"
+
+
+    volumes:
+      - ./searxng:/etc/searxng:rw
     networks:
       - proxy-local
       - ai
@@ -80,9 +82,13 @@ services:
       ENABLE_RAG_WEB_SEARCH: "true"
       RAG_WEB_SEARCH_ENGINE: "searxng"
       SEARXNG_QUERY_URL: "http://searxng:8080/search?q=<query>&format=json"
+
       # Hermes Agent runs on host, exposed at host.docker.internal:8642 (OpenAI-compat).
       # OPENAI_API_BASE_URLS / OPENAI_API_KEYS come from ai.env so the key isn't in git.
       ENABLE_OPENAI_API: "true"
+
+
+
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
