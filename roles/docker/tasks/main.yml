@@ -3,8 +3,10 @@
   ansible.builtin.get_url:
     url: "{{ docker_signing_key_url }}"
     dest: /etc/apt/keyrings/docker.asc
+    checksum: "sha256:{{ docker_signing_key_sha256 }}"
     mode: "0644"
   become: true
+
 
 - name: Remove old docker.list
   ansible.builtin.file:
