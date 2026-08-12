@@ -16,6 +16,7 @@ secrets.plain.yml
 *.retry
 .ansible/
 inventory/host_vars/*.local.yml
+inventory/group_vars/all/*.local.yml
 
 # Python
 __pycache__/
