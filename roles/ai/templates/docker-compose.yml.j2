@@ -7,31 +7,7 @@ networks:
   ai:
     external: false
 
-volumes:
-  openclaw-plugin-runtime-deps:
 services:
-  # ── Ollama — local LLM inference ──────────────────────────────
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    restart: unless-stopped
-    ports:
-      - 11434:11434
-    volumes:
-      - ./ollama:/root/.ollama
-    environment:
-      OLLAMA_HOST: 0.0.0.0
-    # Capped so inference doesn't starve other services (2/4 cores, 4/15 GB RAM).
-    # This fits llama3.2:3b (~2 GB) but not llama3.1:8b (~5 GB).
-    # GPU: GTX 950M has only 2 GB VRAM — not enough for any useful model.
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 4G
-    networks:
-      - proxy-local
-      - ai
   # ── SearXNG — privacy-respecting metasearch (used by Hermes Agent) ────
   searxng:
     image: "{{ ai_searxng_repo }}@{{ ai_searxng_digest }}"
@@ -94,7 +70,6 @@ services:
     volumes:
       - ./open-webui:/app/backend/data
     depends_on:
-      - ollama
       - searxng
     networks:
       - proxy-local
