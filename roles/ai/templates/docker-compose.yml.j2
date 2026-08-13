@@ -39,6 +39,12 @@ services:
       retries: 3
       start_period: 30s
 
+    deploy:
+      resources:
+        limits:
+          cpus: "{{ ai_searxng_cpu_limit }}"
+          memory: "{{ ai_searxng_memory_limit }}"
+
     volumes:
       - ./searxng:/etc/searxng:rw
     networks:

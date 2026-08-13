@@ -7,6 +7,10 @@ ai_searxng_digest: "sha256:88abccd25d3d54bf579d4ca76b95cc28cc5807151a6ce25bd40cc
 # Searxng subdomain
 ai_searxng_subdomain: "searxng"
 
+# Searxng resource limits
+ai_searxng_cpu_limit: "0.5"
+ai_searxng_memory_limit: "512m"
+
 # OpenWebUI image repo
 ai_openwebui_repo: "ghcr.io/open-webui/open-webui"
 
