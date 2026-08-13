@@ -7,3 +7,9 @@
     group: denispng
     mode: "0644"
   become: true
+
+- name: Deploy the ai stack
+  community.docker.docker_compose_v2:
+    project_src: /srv/homelab/ai
+    state: present
+  become: true
