@@ -1,6 +1,7 @@
 ---
 - name: Converge the homeserver
   hosts: homeserver
+  become: true
   roles:
     - common
     - docker
