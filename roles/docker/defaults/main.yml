@@ -18,4 +18,4 @@ docker_packages:
   - docker-compose-plugin
 
 docker_users:
-  - denispng
+  - "{{ homelab_user }}"
