@@ -1,0 +1,8 @@
+---
+- name: Daemon-reload user systemd
+  ansible.builtin.systemd_service:
+    name: hermes-gateway.service
+    scope: user
+    daemon_reload: true
+    state: restarted
+  become: false

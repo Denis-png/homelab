@@ -23,3 +23,6 @@ ai_openwebui_subdomain: "chat"
 # OpenWebUI resource limits
 ai_openwebui_cpu_limit: "1.0"
 ai_openwebui_memory_limit: "1g"
+
+# Hermes home path
+ai_hermes_home: "{{ homelab_user_home }}/.hermes"

@@ -13,3 +13,33 @@
     project_src: /srv/homelab/ai
     state: present
   become: true
+
+- name: Render the hermes gateway user unit
+  ansible.builtin.template:
+    src: hermes-gateway.service.j2
+    dest: "{{ homelab_user_home }}/.config/systemd/user/hermes-gateway.service"
+    mode: "0644"
+  become: false
+  notify: Daemon-reload user systemd
+
+- name: Query lingering state
+  ansible.builtin.command:
+    cmd: loginctl show-user {{ homelab_user }} --property=Linger --value
+  changed_when: false
+  become: false
+  register: ai_hermes_linger
+
+- name: Ensure lingering is enabled
+  ansible.builtin.command: loginctl enable-linger {{ homelab_user }}
+  when: ai_hermes_linger.stdout | trim != "yes"
+  changed_when: true
+  become: true
+
+- name: Ensure the hermes gateway is enabled and running
+  ansible.builtin.systemd_service:
+    name: hermes-gateway.service
+    scope: user
+    enabled: true
+    state: started
+    daemon_reload: true
+  become: false
