@@ -51,3 +51,14 @@
     append: true
   loop: "{{ docker_users }}"
   become: true
+
+- name: Configure Docker daemon
+  ansible.builtin.template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+    validate: python3 -c "import json, sys; json.load(open(sys.argv[1]))" %s
+  become: true
+  notify: Restart Docker
