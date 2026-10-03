@@ -1,0 +1,15 @@
+---
+- name: Render Traefik dynamic routes
+  ansible.builtin.template:
+    src: route.yml.j2
+    dest: "{{ traefik_dynamic_dir }}/{{ item.key }}.yml"
+    owner: denispng
+    group: denispng
+    mode: "0644"
+  loop: "{{ services | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  vars:
+    svc_name: "{{ item.key }}"
+    svc: "{{ item.value }}"
+  become: true

@@ -1,0 +1,18 @@
+http:
+    routers:
+        {{ svc_name }}:
+            rule: "Host(`{{ svc.subdomain }}.{{ homelab_domain }}`)"
+            service: {{  svc.internal_service | default(svc_name) }}
+            entryPoints:
+                - websecure
+            tls:
+                certResolver: letsencrypt
+
+{% if svc.internal_service is not defined %}
+    services:
+        {{ svc_name }}:
+            loadBalancer:
+                servers:
+                    - url: "{{ svc.upstream }}"
+
+{% endif %}
