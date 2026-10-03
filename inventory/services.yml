@@ -1,0 +1,44 @@
+---
+# Services routed through Traefik.
+# Hostname is derived: <subdomain>.<homelab_domain>
+services:
+  traefik:
+    subdomain: proxy
+    internal_service: api@internal
+
+  adguard:
+    subdomain: adguard
+    upstream: "http://adguard:3000"
+    wildcard_tls: true  # emits tls.domains
+
+  cloud:
+    subdomain: cloud
+    upstream: "http://nextcloud-app:80"
+
+  gitea:
+    subdomain: gitea
+    upstream: "http://gitea:3000"
+
+  grafana:
+    subdomain: dash
+    upstream: "http://grafana:3000"
+
+  ntfy:
+    subdomain: ntfy
+    upstream: "http://ntfy:80"
+
+  open-webui:
+    subdomain: chat
+    upstream: "http://open-webui:8080"
+
+  portainer:
+    subdomain: portainer
+    upstream: "http://portainer:9000"
+
+  searxng:
+    subdomain: searxng
+    upstream: "http://searxng:8080"
+
+  vaultwarden:
+    subdomain: vault
+    upstream: "http://vaultwarden:80"

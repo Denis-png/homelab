@@ -2,5 +2,6 @@
 # Homelab user and home path
 homelab_user: "denispng"
 homelab_user_home: "/home/{{ homelab_user }}"
-# Placeholder domain until SOPS lands
+# Placeholder domain and LAN IP until SOPS lands
 homelab_domain: example.com
+homelab_lan_ip: 10.0.0.1
