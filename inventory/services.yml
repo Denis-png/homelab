@@ -6,11 +6,6 @@ services:
     subdomain: proxy
     internal_service: api@internal
 
-  adguard:
-    subdomain: adguard
-    upstream: "http://adguard:3000"
-    wildcard_tls: true  # emits tls.domains
-
   cloud:
     subdomain: cloud
     upstream: "http://nextcloud-app:80"
