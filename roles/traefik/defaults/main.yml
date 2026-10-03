@@ -1,2 +1,8 @@
 ---
-traefik_dynamic_dir: /tmp/traefik-render
+traefik_dynamic_dir: /srv/homelab/network/traefik/dynamic
+traefik_legacy_routes:
+  - adguard
+  - homeassistant
+  - hub
+  - jellyfin
+  - tv

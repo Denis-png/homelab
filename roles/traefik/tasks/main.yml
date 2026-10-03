@@ -13,3 +13,22 @@
     svc_name: "{{ item.key }}"
     svc: "{{ item.value }}"
   become: true
+
+- name: Find existing route files
+  ansible.builtin.find:
+    paths: "{{ traefik_dynamic_dir }}"
+    patterns: "*.yml"
+  register: traefik_existing
+  become: true
+
+- name: Remove route files not defined in the service inventory
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ traefik_existing.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+  when:
+    - (item.path | basename | splitext | first) not in services
+    - (item.path | basename | splitext | first) not in traefik_legacy_routes
+  become: true
