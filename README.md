@@ -43,10 +43,10 @@ docs/          architecture, runbooks, decision records
 ## Roadmap
 
 - [x] **Phase 0** — repository scaffold, CI, secret scanning
-- [ ] **Phase 1** — Ansible foundation: inventory, `common` and `docker` roles
-- [ ] **Phase 2** — first stack converted end to end
-- [ ] **Phase 3** — service inventory and templated Traefik routes
-- [ ] **Phase 4** — SOPS-encrypted secrets
+- [x] **Phase 1** — Ansible foundation: inventory, `common` and `docker` roles
+- [x] **Phase 2** — first stack converted end to end
+- [x] **Phase 3** — service inventory and templated Traefik routes
+- [x] **Phase 4** — SOPS-encrypted secrets
 - [ ] **Phase 5** — remaining stacks
 - [ ] **Phase 6** — generated documentation enforced by CI
 - [ ] **Phase 7** — alert routing, runbooks, SLOs
