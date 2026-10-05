@@ -1,4 +1,7 @@
 ---
+# Rendered from the sops-encrypted inventory;
+ai_env_file: /srv/homelab/ai/ai.env
+
 # Searxng image repo
 ai_searxng_repo: "searxng/searxng"
 # Searxng image digest

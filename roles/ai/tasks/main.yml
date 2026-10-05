@@ -43,3 +43,14 @@
     state: started
     daemon_reload: true
   become: false
+
+- name: Render the ai stack env file
+  ansible.builtin.template:
+    src: ai.env.j2
+    dest: "{{ ai_env_file }}"
+    owner: denispng
+    group: denispng
+    mode: "0600"
+  no_log: true
+  diff: false
+  become: true

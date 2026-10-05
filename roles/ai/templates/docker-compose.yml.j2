@@ -59,7 +59,7 @@ services:
     restart: unless-stopped
 
     env_file:
-      - /home/denispng/secrets/ai.env
+      - "{{ ai_env_file }}"
 
     environment:
       WEBUI_URL: "https://{{ ai_openwebui_subdomain }}.{{ homelab_domain }}"
